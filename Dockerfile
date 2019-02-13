@@ -4,6 +4,6 @@ COPY Pipfile /Pipfile
 RUN pip install pipenv
 RUN pipenv install --system
 COPY run.py /app/
-COPY debt/ /app/debt/
+COPY config.py /app/
 WORKDIR /app
 CMD ["python3", "run.py"]
