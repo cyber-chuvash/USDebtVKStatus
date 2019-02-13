@@ -14,13 +14,16 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(funcName)s - %(messa
 
 class StatusUpdater:
     def __init__(self):
-        self.vk = vk_requests.create_api(
-            app_id=6666569,
-            login=Config.vk_login,
-            password=Config.vk_pass,
-            scope='status,offline',
-            api_version='5.92',
-        )
+        try:
+            self.vk = vk_requests.create_api(
+                app_id=6666569,
+                login=Config.vk_login,
+                password=Config.vk_pass,
+                scope='status,offline',
+                api_version='5.92',
+            )
+        except KeyError:
+            self.vk = vk_requests.create_api(service_token=Config.vk_token)
         logging.info('Initialized VK API instance')
         try:
             self.status_str = Config.status_str
